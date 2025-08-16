@@ -272,5 +272,3 @@ MIT License - see [LICENSE](LICENSE) file for details
 - Contributors and users of this project
 
 ---
-
-Made with ❤️ for Taiwan's investment community
