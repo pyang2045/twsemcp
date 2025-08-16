@@ -265,12 +265,6 @@ Contributions are welcome! Please see our [Contributing Guide](CONTRIBUTING.md) 
 
 MIT License - see [LICENSE](LICENSE) file for details
 
-## 🆘 Support
-
-- **Issues**: [GitHub Issues](https://github.com/pyang2045/twsemcp/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/pyang2045/twsemcp/discussions)
-- **Documentation**: [Full Documentation](https://github.com/pyang2045/twsemcp/wiki)
-
 ## 🙏 Acknowledgments
 
 - Taiwan Stock Exchange for providing the OpenAPI
