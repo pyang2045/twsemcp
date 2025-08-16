@@ -1,56 +1,74 @@
 # TWSE MCP Server
 
-An MCP (Model Context Protocol) server that provides access to Taiwan Stock Exchange (TWSE) market data through a standardized interface.
+[![npm version](https://img.shields.io/npm/v/twse-mcp.svg)](https://www.npmjs.com/package/twse-mcp)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Node.js Version](https://img.shields.io/node/v/twse-mcp.svg)](https://nodejs.org)
 
-## Features
+A Model Context Protocol (MCP) server that provides real-time access to Taiwan Stock Exchange (TWSE) market data, financial reports, and trading analytics through Claude Desktop.
 
-- Real-time access to TWSE market data
-- Daily stock trading information
-- P/E ratios and dividend yields
-- Market indices (TAIEX and others)
-- Foreign investor holdings
-- Monthly trading statistics
-- Stock search functionality
-- **NEW: Complete financial reports (v1.1.0)**
-  - Monthly revenue reports
-  - Quarterly income statements
-  - Balance sheets
-  - Profitability analysis (ROE, ROA, margins)
-  - Industry EPS comparisons
+## 🚀 Quick Start
 
-## Installation
-
-### Using NPX (Recommended)
-No installation required! Simply run:
 ```bash
 npx twse-mcp
 ```
 
-### Global Installation
+No installation required! The server connects directly to TWSE's official API to provide comprehensive market data.
+
+## 📋 Features
+
+### Market Data & Analytics
+- 📊 **Real-time Trading Data** - Daily stock prices, volumes, and OHLC data
+- 📈 **Market Indices** - TAIEX and sector indices with real-time updates
+- 💹 **Technical Indicators** - P/E ratios, dividend yields, price-to-book values
+- 📉 **Trading Analytics** - Top volume stocks, margin trading, 5-second bid/ask stats
+
+### Financial Intelligence
+- 💰 **Financial Statements** - Quarterly income statements and balance sheets
+- 📊 **Revenue Reports** - Monthly revenue with YoY/MoM comparisons
+- 🎯 **Profitability Metrics** - ROE, ROA, profit margins by company
+- 🏭 **Industry Analysis** - EPS statistics and comparisons by sector
+
+### Investment Insights
+- 🌍 **Foreign Investment** - Top foreign holdings and sector preferences
+- 📈 **ETF Rankings** - Most popular ETFs by investor accounts
+- 🏢 **Corporate Actions** - New IPOs and delisted companies
+- 📅 **Market Calendar** - Trading holidays and market schedules
+
+## 🛠️ Installation
+
+### Option 1: NPX (Recommended)
 ```bash
-npm install -g twse-mcp
+# Run directly without installation
+npx twse-mcp
 ```
 
-### Local Development
+### Option 2: Global Installation
 ```bash
-git clone https://github.com/yourusername/twse-mcp.git
+# Install globally
+npm install -g twse-mcp
+
+# Run the server
+twse-mcp
+```
+
+### Option 3: Local Development
+```bash
+# Clone repository
+git clone https://github.com/pyang2045/twsemcp.git
 cd twse-mcp
+
+# Install dependencies
 npm install
+
+# Build and run
 npm run build
 npm start
 ```
 
-## Usage with Claude Desktop
+## 🔧 Claude Desktop Configuration
 
-Add the following configuration to your Claude Desktop config file:
-
-### MacOS
-Location: `~/Library/Application Support/Claude/claude_desktop_config.json`
-
-### Windows
-Location: `%APPDATA%\\Claude\\claude_desktop_config.json`
-
-### Configuration
+### macOS
+Add to `~/Library/Application Support/Claude/claude_desktop_config.json`:
 
 ```json
 {
@@ -64,234 +82,201 @@ Location: `%APPDATA%\\Claude\\claude_desktop_config.json`
 }
 ```
 
-Or if globally installed:
+### Windows
+Add to `%APPDATA%\Claude\claude_desktop_config.json`:
 
 ```json
 {
   "mcpServers": {
     "twse": {
-      "command": "twse-mcp",
-      "args": [],
+      "command": "npx",
+      "args": ["twse-mcp"],
       "env": {}
     }
   }
 }
 ```
 
-## Available Tools (22 Total)
+## 📚 Available Tools
 
-### Core Market Data
+### Market Data (6 tools)
+| Tool | Description | Example Query |
+|------|-------------|---------------|
+| `getStockDaily` | Daily trading data for all stocks | "Show today's stock prices" |
+| `getStockPERatios` | Valuation metrics | "Find undervalued stocks" |
+| `getMarketIndex` | Market indices (TAIEX, etc.) | "How's the market today?" |
+| `getStockDayAvg` | Daily close vs monthly average | "Show price averages" |
+| `getMonthlyStats` | Monthly trading statistics | "Get monthly highs and lows" |
+| `searchStock` | Search specific stock | "Find TSMC stock data" |
 
-#### 1. `getStockDaily`
-Get daily trading information for all listed stocks.
-- "Get today's stock market data"
-- "Show me daily trading volumes"
+### Financial Reports (6 tools)
+| Tool | Description | Example Query |
+|------|-------------|---------------|
+| `getMonthlyRevenue` | Monthly revenue reports | "Show revenue growth" |
+| `getIncomeStatement` | Quarterly P&L statements | "Get earnings data" |
+| `getBalanceSheet` | Quarterly balance sheets | "Check debt levels" |
+| `getIndustryEPS` | EPS by industry | "Compare sector earnings" |
+| `getProfitAnalysis` | ROE, ROA, margins | "Find profitable companies" |
+| `searchFinancials` | Company-specific financials | "Get TSMC financial reports" |
 
-#### 2. `getStockPERatios`
-Retrieve P/E ratios, dividend yields, and price-to-book ratios.
-- "What are the P/E ratios for stocks?"
-- "Show dividend yields"
+### Trading Analysis (3 tools)
+| Tool | Description | Example Query |
+|------|-------------|---------------|
+| `getTop20Volume` | Most traded stocks | "What's hot today?" |
+| `getMarginTrading` | Margin/short data | "Show leverage levels" |
+| `getFiveSecondStats` | Real-time bid/ask | "Get order flow" |
 
-#### 3. `getMarketIndex`
-Get market index statistics including TAIEX.
-- "Show market indices"
-- "What's the TAIEX index today?"
+### Investment Research (7 tools)
+| Tool | Description | Example Query |
+|------|-------------|---------------|
+| `getTopForeignHoldings` | Top foreign holdings | "What are foreigners buying?" |
+| `getForeignCategoryHoldings` | Foreign investment by sector | "Foreign sector preferences" |
+| `getNewListings` | Recent IPOs | "Show new stocks" |
+| `getSuspendedListings` | Delisted companies | "Which stocks were delisted?" |
+| `getETFRanking` | Popular ETFs | "Top ETF choices" |
+| `getIndexHistory` | Historical index data | "TAIEX history" |
+| `getHolidaySchedule` | Market calendar | "When is market closed?" |
 
-#### 4. `getStockDayAvg`
-Get daily closing prices and monthly average prices.
-- "Show monthly average prices"
-- "Get closing price comparisons"
+## 💡 Example Usage
 
-#### 5. `getMonthlyStats`
-Get monthly trading statistics.
-- "Show monthly trading data"
-- "Get monthly high and low prices"
-
-### Trading Analysis
-
-#### 6. `getTop20Volume`
-Get top 20 stocks by daily trading volume.
-- "What are the most traded stocks today?"
-- "Show top volume stocks"
-
-#### 7. `getMarginTrading`
-Get margin trading and short selling statistics.
-- "Show margin trading data"
-- "What's the short interest?"
-
-#### 8. `getFiveSecondStats`
-Get real-time 5-second bid/ask statistics.
-- "Show current bid/ask spread"
-- "Get real-time trading stats"
-
-### Foreign Investment
-
-#### 9. `getTopForeignHoldings`
-View top 20 foreign investor holdings.
-- "What stocks do foreign investors hold?"
-- "Show top foreign holdings"
-
-#### 10. `getForeignCategoryHoldings`
-Get foreign holdings by industry category.
-- "Show foreign investment by sector"
-- "Which industries attract foreign investment?"
-
-### Company Information
-
-#### 11. `getNewListings`
-Get recently listed companies.
-- "Show new IPOs"
-- "What companies just listed?"
-
-#### 12. `getSuspendedListings`
-Get delisted or suspended companies.
-- "Show delisted stocks"
-- "Which companies were suspended?"
-
-### ETF & Index
-
-#### 13. `getETFRanking`
-Get top ETFs by regular investment accounts.
-- "Show popular ETFs"
-- "Which ETFs have most investors?"
-
-#### 14. `getIndexHistory`
-Get historical TAIEX index data.
-- "Show TAIEX history"
-- "Get index OHLC data"
-
-### Market Calendar
-
-#### 15. `getHolidaySchedule`
-Get TWSE market holiday schedule.
-- "When is the market closed?"
-- "Show trading holidays"
-
-### Financial Reports (NEW v1.1.0)
-
-#### 16. `getMonthlyRevenue`
-Get monthly revenue reports for all companies.
-- "Show revenue growth trends"
-- "Which companies have growing sales?"
-
-#### 17. `getIncomeStatement`
-Get quarterly income statements.
-- "Show company earnings"
-- "Get profit and loss data"
-
-#### 18. `getBalanceSheet`
-Get quarterly balance sheets.
-- "Show company assets and debt"
-- "Check financial position"
-
-#### 19. `getIndustryEPS`
-Get EPS statistics by industry.
-- "Compare industry profitability"
-- "Which sector has best earnings?"
-
-#### 20. `getProfitAnalysis`
-Get ROE, ROA, and profit margins.
-- "Show profitability metrics"
-- "Find high ROE companies"
-
-#### 21. `searchFinancials`
-Search financial reports for specific company.
-
-**Parameters:**
-- `stockCode`: Company code (e.g., "2330")
-- `reportType`: "revenue", "income", "balance", or "profit"
-
-**Examples:**
-- "Get TSMC financials"
-- "Show 2330 balance sheet"
-
-### Search Function
-
-#### 22. `searchStock`
-Search for specific stock by code or name.
-
-**Parameters:**
-- `query`: Stock code (e.g., "2330") or name
-- `dataType`: Type of data ("daily", "peratio", "monthly")
-
-**Examples:**
-- "Search for TSMC stock data"
-- "Find stock 2330"
-- "Show P/E ratio for stock 2317"
-
-## Example Conversations
-
-### Basic Market Overview
+### Basic Market Check
 ```
-User: "Show me today's market index"
-Assistant: *Uses getMarketIndex tool to fetch and display current indices*
+You: "How's the Taiwan stock market doing today?"
+Claude: [Uses getMarketIndex to show TAIEX and major indices]
 
-User: "What are the top foreign holdings?"
-Assistant: *Uses getTopForeignHoldings to show top 20 foreign-held stocks*
+You: "What are the most active stocks?"
+Claude: [Uses getTop20Volume to display top traded stocks]
 ```
 
-### Stock Research
+### Company Research
 ```
-User: "I want to research TSMC (2330)"
-Assistant: *Uses searchStock with query="2330" to find TSMC data*
-
-User: "Show me its P/E ratio"
-Assistant: *Uses searchStock with query="2330" and dataType="peratio"*
-```
-
-### Market Analysis
-```
-User: "Show me stocks with high dividend yields"
-Assistant: *Uses getStockPERatios and filters for high dividend yields*
-
-User: "What stocks traded the most today?"
-Assistant: *Uses getStockDaily and sorts by trading volume*
+You: "Analyze TSMC's financial performance"
+Claude: [Uses searchFinancials("2330", "income") for earnings]
+        [Uses searchFinancials("2330", "balance") for financial position]
+        [Uses searchFinancials("2330", "profit") for profitability metrics]
 ```
 
-## API Data Source
+### Investment Screening
+```
+You: "Find high dividend yield stocks"
+Claude: [Uses getStockPERatios to filter for high dividend yields]
 
-This MCP server fetches data from the official Taiwan Stock Exchange OpenAPI:
-- Base URL: https://openapi.twse.com.tw/
-- Documentation: https://openapi.twse.com.tw/
+You: "Show me what foreign investors are buying"
+Claude: [Uses getTopForeignHoldings for top 20 foreign picks]
+```
 
-## Development
+## 🔍 Search Functions
 
-### Building from Source
+### searchStock
+Search for specific stock data:
+```javascript
+{
+  "query": "2330",        // Stock code or name
+  "dataType": "daily"     // "daily" | "peratio" | "monthly"
+}
+```
+
+### searchFinancials
+Search company financial reports:
+```javascript
+{
+  "stockCode": "2330",    // Company stock code
+  "reportType": "income"  // "revenue" | "income" | "balance" | "profit"
+}
+```
+
+## 📊 Data Sources
+
+- **Official API**: Taiwan Stock Exchange OpenAPI
+- **Base URL**: https://openapi.twse.com.tw/
+- **Update Frequency**: 
+  - Real-time: 5-second stats during market hours
+  - Daily: After market close (~14:30 TST)
+  - Monthly: Financial reports on 10th of each month
+  - Quarterly: Financial statements 45 days after quarter end
+
+## 🔧 Development
+
+### Prerequisites
+- Node.js >= 18.0.0
+- TypeScript 5.0+
+
+### Build from Source
 ```bash
+# Install dependencies
 npm install
-npm run build
-```
 
-### Running in Development Mode
-```bash
+# Development mode (with hot reload)
 npm run dev
+
+# Build for production
+npm run build
+
+# Run tests
+npm test
 ```
 
-### TypeScript Support
-The project is written in TypeScript with full type definitions for all TWSE data structures.
+### Project Structure
+```
+twse-mcp/
+├── src/
+│   ├── index.ts           # MCP server implementation
+│   └── api/
+│       └── twse-client.ts # TWSE API client
+├── dist/                  # Compiled JavaScript
+├── bin/                   # CLI executable
+└── examples/              # Configuration examples
+```
 
-## Publishing to NPM
+## 📝 API Response Format
 
-1. Update version in `package.json`
-2. Build the project: `npm run build`
-3. Publish: `npm publish`
+All tools return JSON data with Traditional Chinese field names:
 
-## Limitations
+```json
+{
+  "公司代號": "2330",
+  "公司名稱": "台積電",
+  "收盤價": "595.00",
+  "本益比": "25.83",
+  "殖利率": "2.02"
+}
+```
 
-- Data is fetched in real-time from TWSE API
-- API rate limits may apply
-- Some data may have delays as per TWSE policies
-- Currently supports Traditional Chinese stock names
+## ⚠️ Limitations
 
-## Contributing
+- **Rate Limits**: TWSE API may have rate limiting
+- **Data Delay**: Some data has 15-20 minute delay
+- **Language**: Field names in Traditional Chinese
+- **Market Hours**: Real-time data only during TSE trading hours (09:00-13:30 TST)
+- **Data Volume**: Large queries return first 100 records
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+## 🤝 Contributing
 
-## License
+Contributions are welcome! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
 
-MIT
+### Development Workflow
+1. Fork the repository
+2. Create feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit changes (`git commit -m 'Add amazing feature'`)
+4. Push to branch (`git push origin feature/amazing-feature`)
+5. Open Pull Request
 
-## Support
+## 📜 License
 
-For issues or questions, please open an issue on GitHub:
-https://github.com/yourusername/twse-mcp/issues
+MIT License - see [LICENSE](LICENSE) file for details
+
+## 🆘 Support
+
+- **Issues**: [GitHub Issues](https://github.com/pyang2045/twsemcp/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/pyang2045/twsemcp/discussions)
+- **Documentation**: [Full Documentation](https://github.com/pyang2045/twsemcp/wiki)
+
+## 🙏 Acknowledgments
+
+- Taiwan Stock Exchange for providing the OpenAPI
+- Anthropic for the MCP SDK
+- Contributors and users of this project
+
+---
+
+Made with ❤️ for Taiwan's investment community
