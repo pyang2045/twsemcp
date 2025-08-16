@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "twse": {
+      "command": "npx",
+      "args": ["twse-mcp"],
+      "env": {}
+    }
+  }
+}

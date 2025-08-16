@@ -1,0 +1,48 @@
+{
+  "name": "twse-mcp",
+  "version": "1.0.0",
+  "description": "MCP server for Taiwan Stock Exchange (TWSE) market data API",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "twse-mcp": "./bin/twse-mcp.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx src/index.ts",
+    "start": "node dist/index.js",
+    "prepare": "npm run build"
+  },
+  "keywords": [
+    "mcp",
+    "twse",
+    "taiwan",
+    "stock",
+    "market",
+    "api",
+    "model-context-protocol"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^0.5.0",
+    "axios": "^1.6.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0",
+    "tsx": "^4.0.0"
+  },
+  "files": [
+    "dist",
+    "bin",
+    "README.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/twse-mcp.git"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
