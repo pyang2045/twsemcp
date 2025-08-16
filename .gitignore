@@ -7,3 +7,6 @@ dist/
 coverage/
 .vscode/
 .idea/
+*.tgz
+test-*.js
+test-*.json

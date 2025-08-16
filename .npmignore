@@ -4,5 +4,10 @@ tsconfig.json
 *.log
 .DS_Store
 examples/
-PLAN.md
+docs/
 *.tsbuildinfo
+CLAUDE.md
+PUBLISHING_GUIDE.md
+*.tgz
+test-*.js
+test-*.json
