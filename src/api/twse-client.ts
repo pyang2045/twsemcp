@@ -126,6 +126,76 @@ export interface IndexHistory {
   Close: string;
 }
 
+export interface MonthlyRevenue {
+  出表日期: string;
+  資料年月: string;
+  公司代號: string;
+  公司名稱: string;
+  產業別: string;
+  營業收入_當月營收: string;
+  營業收入_上月營收: string;
+  營業收入_去年當月營收: string;
+  營業收入_上月比較增減: string;
+  營業收入_去年同月增減: string;
+  累計營業收入_當月累計營收: string;
+  累計營業收入_去年累計營收: string;
+  累計營業收入_前期比較增減: string;
+  備註: string;
+}
+
+export interface IncomeStatement {
+  年度_季度: string;
+  公司代號: string;
+  公司名稱: string;
+  營業收入: string;
+  營業成本: string;
+  營業毛利: string;
+  營業費用: string;
+  營業利益: string;
+  營業外收入及支出: string;
+  稅前淨利: string;
+  所得稅費用: string;
+  本期淨利: string;
+  每股盈餘: string;
+}
+
+export interface BalanceSheet {
+  年度_季度: string;
+  公司代號: string;
+  公司名稱: string;
+  流動資產: string;
+  非流動資產: string;
+  資產總額: string;
+  流動負債: string;
+  非流動負債: string;
+  負債總額: string;
+  股本: string;
+  權益總額: string;
+  負債及權益總額: string;
+}
+
+export interface IndustryEPS {
+  產業別: string;
+  公司家數: string;
+  平均每股盈餘: string;
+  最高每股盈餘: string;
+  最低每股盈餘: string;
+  產業平均本益比: string;
+}
+
+export interface ProfitAnalysis {
+  年度季別: string;
+  公司代號: string;
+  公司名稱: string;
+  毛利率: string;
+  營業利益率: string;
+  稅前純益率: string;
+  稅後純益率: string;
+  資產報酬率: string;
+  權益報酬率: string;
+  每股盈餘: string;
+}
+
 export class TWSEClient {
   private client: AxiosInstance;
   private baseURL = 'https://openapi.twse.com.tw/v1';
@@ -273,6 +343,69 @@ export class TWSEClient {
       return response.data;
     } catch (error) {
       throw new Error(`Failed to fetch index history: ${error}`);
+    }
+  }
+
+  async getMonthlyRevenue(): Promise<MonthlyRevenue[]> {
+    try {
+      const response = await this.client.get('/opendata/t187ap05_L');
+      return response.data;
+    } catch (error) {
+      throw new Error(`Failed to fetch monthly revenue: ${error}`);
+    }
+  }
+
+  async getIncomeStatement(): Promise<IncomeStatement[]> {
+    try {
+      const response = await this.client.get('/opendata/t187ap06_L_ci');
+      return response.data;
+    } catch (error) {
+      throw new Error(`Failed to fetch income statements: ${error}`);
+    }
+  }
+
+  async getBalanceSheet(): Promise<BalanceSheet[]> {
+    try {
+      const response = await this.client.get('/opendata/t187ap07_L_ci');
+      return response.data;
+    } catch (error) {
+      throw new Error(`Failed to fetch balance sheets: ${error}`);
+    }
+  }
+
+  async getIndustryEPS(): Promise<IndustryEPS[]> {
+    try {
+      const response = await this.client.get('/opendata/t187ap14_L');
+      return response.data;
+    } catch (error) {
+      throw new Error(`Failed to fetch industry EPS: ${error}`);
+    }
+  }
+
+  async getProfitAnalysis(): Promise<ProfitAnalysis[]> {
+    try {
+      const response = await this.client.get('/opendata/t187ap17_L');
+      return response.data;
+    } catch (error) {
+      throw new Error(`Failed to fetch profit analysis: ${error}`);
+    }
+  }
+
+  async getFinancialIncomeStatement(): Promise<IncomeStatement[]> {
+    try {
+      const response = await this.client.get('/opendata/t187ap06_L_basi');
+      return response.data;
+    } catch (error) {
+      throw new Error(`Failed to fetch financial income statements: ${error}`);
+    }
+  }
+
+  async getFinancialBalanceSheet(): Promise<BalanceSheet[]> {
+    try {
+      const response = await this.client.get('/opendata/t187ap07_L_basi');
+      return response.data;
+    } catch (error) {
+      throw new Error(`Failed to fetch financial balance sheets: ${error}`);
     }
   }
 }

@@ -11,6 +11,12 @@ An MCP (Model Context Protocol) server that provides access to Taiwan Stock Exch
 - Foreign investor holdings
 - Monthly trading statistics
 - Stock search functionality
+- **NEW: Complete financial reports (v1.1.0)**
+  - Monthly revenue reports
+  - Quarterly income statements
+  - Balance sheets
+  - Profitability analysis (ROE, ROA, margins)
+  - Industry EPS comparisons
 
 ## Installation
 
@@ -72,7 +78,7 @@ Or if globally installed:
 }
 ```
 
-## Available Tools
+## Available Tools (22 Total)
 
 ### Core Market Data
 
@@ -161,9 +167,47 @@ Get TWSE market holiday schedule.
 - "When is the market closed?"
 - "Show trading holidays"
 
+### Financial Reports (NEW v1.1.0)
+
+#### 16. `getMonthlyRevenue`
+Get monthly revenue reports for all companies.
+- "Show revenue growth trends"
+- "Which companies have growing sales?"
+
+#### 17. `getIncomeStatement`
+Get quarterly income statements.
+- "Show company earnings"
+- "Get profit and loss data"
+
+#### 18. `getBalanceSheet`
+Get quarterly balance sheets.
+- "Show company assets and debt"
+- "Check financial position"
+
+#### 19. `getIndustryEPS`
+Get EPS statistics by industry.
+- "Compare industry profitability"
+- "Which sector has best earnings?"
+
+#### 20. `getProfitAnalysis`
+Get ROE, ROA, and profit margins.
+- "Show profitability metrics"
+- "Find high ROE companies"
+
+#### 21. `searchFinancials`
+Search financial reports for specific company.
+
+**Parameters:**
+- `stockCode`: Company code (e.g., "2330")
+- `reportType`: "revenue", "income", "balance", or "profit"
+
+**Examples:**
+- "Get TSMC financials"
+- "Show 2330 balance sheet"
+
 ### Search Function
 
-#### 16. `searchStock`
+#### 22. `searchStock`
 Search for specific stock by code or name.
 
 **Parameters:**

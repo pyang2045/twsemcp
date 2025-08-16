@@ -166,6 +166,66 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
           properties: {},
         },
       },
+      {
+        name: 'getMonthlyRevenue',
+        description: 'Get monthly revenue reports for all listed companies',
+        inputSchema: {
+          type: 'object',
+          properties: {},
+        },
+      },
+      {
+        name: 'getIncomeStatement',
+        description: 'Get quarterly income statements for all listed companies (general industry)',
+        inputSchema: {
+          type: 'object',
+          properties: {},
+        },
+      },
+      {
+        name: 'getBalanceSheet',
+        description: 'Get quarterly balance sheets for all listed companies (general industry)',
+        inputSchema: {
+          type: 'object',
+          properties: {},
+        },
+      },
+      {
+        name: 'getIndustryEPS',
+        description: 'Get earnings per share (EPS) statistics by industry',
+        inputSchema: {
+          type: 'object',
+          properties: {},
+        },
+      },
+      {
+        name: 'getProfitAnalysis',
+        description: 'Get comprehensive profitability analysis including ROE, ROA, profit margins',
+        inputSchema: {
+          type: 'object',
+          properties: {},
+        },
+      },
+      {
+        name: 'searchFinancials',
+        description: 'Search financial reports for specific company',
+        inputSchema: {
+          type: 'object',
+          properties: {
+            stockCode: {
+              type: 'string',
+              description: 'Stock code to search (e.g., 2330)',
+            },
+            reportType: {
+              type: 'string',
+              enum: ['revenue', 'income', 'balance', 'profit'],
+              description: 'Type of financial report',
+              default: 'revenue',
+            },
+          },
+          required: ['stockCode'],
+        },
+      },
     ],
   };
 });
@@ -392,6 +452,111 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
             {
               type: 'text',
               text: JSON.stringify(data, null, 2),
+            },
+          ],
+        };
+      }
+
+      case 'getMonthlyRevenue': {
+        const data = await twseClient.getMonthlyRevenue();
+        return {
+          content: [
+            {
+              type: 'text',
+              text: JSON.stringify(data.slice(0, 100), null, 2),
+            },
+          ],
+        };
+      }
+
+      case 'getIncomeStatement': {
+        const data = await twseClient.getIncomeStatement();
+        return {
+          content: [
+            {
+              type: 'text',
+              text: JSON.stringify(data.slice(0, 100), null, 2),
+            },
+          ],
+        };
+      }
+
+      case 'getBalanceSheet': {
+        const data = await twseClient.getBalanceSheet();
+        return {
+          content: [
+            {
+              type: 'text',
+              text: JSON.stringify(data.slice(0, 100), null, 2),
+            },
+          ],
+        };
+      }
+
+      case 'getIndustryEPS': {
+        const data = await twseClient.getIndustryEPS();
+        return {
+          content: [
+            {
+              type: 'text',
+              text: JSON.stringify(data, null, 2),
+            },
+          ],
+        };
+      }
+
+      case 'getProfitAnalysis': {
+        const data = await twseClient.getProfitAnalysis();
+        return {
+          content: [
+            {
+              type: 'text',
+              text: JSON.stringify(data.slice(0, 100), null, 2),
+            },
+          ],
+        };
+      }
+
+      case 'searchFinancials': {
+        const stockCode = (args?.stockCode as string)?.toUpperCase() || '';
+        const reportType = (args?.reportType as string) || 'revenue';
+        
+        let data: any[] = [];
+        
+        switch (reportType) {
+          case 'revenue':
+            const revenue = await twseClient.getMonthlyRevenue();
+            data = revenue.filter(item => 
+              item.公司代號 === stockCode
+            );
+            break;
+          case 'income':
+            const income = await twseClient.getIncomeStatement();
+            data = income.filter(item => 
+              item.公司代號 === stockCode
+            );
+            break;
+          case 'balance':
+            const balance = await twseClient.getBalanceSheet();
+            data = balance.filter(item => 
+              item.公司代號 === stockCode
+            );
+            break;
+          case 'profit':
+            const profit = await twseClient.getProfitAnalysis();
+            data = profit.filter(item => 
+              item.公司代號 === stockCode
+            );
+            break;
+        }
+        
+        return {
+          content: [
+            {
+              type: 'text',
+              text: data.length > 0 
+                ? JSON.stringify(data, null, 2)
+                : `No financial data found for stock ${stockCode}`,
             },
           ],
         };
